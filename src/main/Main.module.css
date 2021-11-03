@@ -1,0 +1,26 @@
+html{
+  background-color: #12130f;
+}
+body{
+    background-color: #12130f;
+}
+
+
+
+  .formTitleLink {
+    color: #707c8b;
+    text-decoration: none;
+    display: inline_block;
+    margin: 0 10px;
+    padding-bottom: 5px;
+  }
+  
+  
+  .formTitleLink_active {
+    color: white;
+    border-bottom: 1px solid #6b5b95;
+  }
+
+  .navbar-brand {
+    color: white;
+}
