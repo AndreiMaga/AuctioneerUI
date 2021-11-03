@@ -44,7 +44,6 @@ class App extends React.Component<IAppProps, IAppState> {
   }
 
   componentDidMount() {
-    document.title = "Auctioneer";
     this.scene.background = new THREE.Color(0x12130f);
     this.renderer.setSize(this.winW, this.winH);
 
