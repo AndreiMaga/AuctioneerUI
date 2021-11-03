@@ -1,15 +1,21 @@
 import React from "react";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
-import { Auth, getAuth, signOut  } from "@firebase/auth";
+import { Auth, getAuth, signOut } from "@firebase/auth";
 import { Button, Form, FormControl, Navbar } from "react-bootstrap";
 import { NavLink, withRouter } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
 import styles from "../main/Main.module.css";
 
-interface IMyNavbarProps{
-    history: any;
-    location: any;
-    match: any;
+library.add(faSearch);
+
+interface IMyNavbarProps {
+  history: any;
+  location: any;
+  match: any;
 }
 
 interface IMyNavbarState {
@@ -26,12 +32,14 @@ class MyNavbar extends React.Component<IMyNavbarProps, IMyNavbarState> {
   }
 
   logout() {
-    signOut(this.state.auth).then(this.gotoLogin).catch(this.gotoLogin)
+    signOut(this.state.auth)
+      .then(this.gotoLogin.bind(this))
+      .catch(this.gotoLogin.bind(this));
   }
 
   gotoLogin() {
-    this.props.history.push("/login")
-        window.location.reload();
+    this.props.history.push("/login");
+    window.location.reload();
   }
 
   render() {
@@ -80,9 +88,15 @@ class MyNavbar extends React.Component<IMyNavbarProps, IMyNavbarState> {
                   placeholder="Search"
                   className="me-2"
                   aria-label="Search"
-                  style={{color: "white", background: "#12130f", borderColor: "#11120e"}}
+                  style={{
+                    color: "white",
+                    background: "#12130f",
+                    borderColor: "#11120e",
+                  }}
                 />
-                <Button variant="outline-success">Search</Button>
+                <Button type="submit" variant="outline-success">
+                  <FontAwesomeIcon icon="search" />
+                </Button>
               </Form>
             </Nav>
           </Navbar.Collapse>
@@ -106,5 +120,4 @@ class MyNavbar extends React.Component<IMyNavbarProps, IMyNavbarState> {
   }
 }
 
-
-export default withRouter(MyNavbar)
+export default withRouter(MyNavbar);
