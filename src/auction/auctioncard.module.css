@@ -1,0 +1,16 @@
+.card{
+    width: 18rem;
+    margin: 1rem;
+    color: white;
+    background-color: #454545 !important;
+    
+}
+
+.darkContent{
+    background-color: #454545 !important;
+    color:white !important;
+}
+
+.endlast{
+    float: right;
+}

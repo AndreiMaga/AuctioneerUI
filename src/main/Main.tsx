@@ -4,6 +4,7 @@ import { BrowserRouter, Route, withRouter } from "react-router-dom";
 import { MyAuctions } from "../auction/myauctuions";
 import { Auctions } from "../auction/auctions";
 import MyNavbar from "../navbar/navbar";
+import styles from "./Main.module.css"
 
 interface IMainProps {
   history: any;
@@ -43,9 +44,11 @@ class Main extends React.Component<IMainProps, IMainState> {
     return (
       <BrowserRouter>
         <MyNavbar />
-        <Route exact path="/main" component={Auctions} />
-        <Route path="/main/auctions" component={Auctions} />
-        <Route path="/main/myauctions" component={MyAuctions} />
+        <div className={styles.darkContent}>
+          <Route exact path="/main" component={Auctions} />
+          <Route path="/main/auctions" component={Auctions} />
+          <Route path="/main/myauctions" component={MyAuctions} />
+        </div>
       </BrowserRouter>
     );
   }

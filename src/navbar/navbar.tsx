@@ -54,33 +54,30 @@ class MyNavbar extends React.Component<IMyNavbarProps, IMyNavbarState> {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link>
-                <NavLink
-                  activeClassName={styles.formTitleLink_active}
-                  className={styles.formTitleLink}
-                  to="/main/auctions"
-                >
-                  Auctions
-                </NavLink>
+              <Nav.Link
+                as={NavLink}
+                activeClassName={styles.formTitleLink_active}
+                className={styles.formTitleLink}
+                to="/main/auctions"
+              >
+                Auctions
               </Nav.Link>
-              <Nav.Link>
-                <NavLink
-                  activeClassName={styles.formTitleLink_active}
-                  className={styles.formTitleLink}
-                  to="/main/myauctions"
-                >
-                  My auctions
-                </NavLink>
+              <Nav.Link
+                as={NavLink}
+                activeClassName={styles.formTitleLink_active}
+                className={styles.formTitleLink}
+                to="/main/myauctions"
+              >
+                My auctions
               </Nav.Link>
 
-              <Nav.Link>
-                <NavLink
-                  activeClassName={styles.formTitleLink_active}
-                  className={styles.formTitleLink}
-                  to="/main/mybids"
-                >
-                  My bids
-                </NavLink>
+              <Nav.Link
+                as={NavLink}
+                activeClassName={styles.formTitleLink_active}
+                className={styles.formTitleLink}
+                to="/main/mybids"
+              >
+                My bids
               </Nav.Link>
               <Form className="d-flex">
                 <FormControl
@@ -101,16 +98,16 @@ class MyNavbar extends React.Component<IMyNavbarProps, IMyNavbarState> {
             </Nav>
           </Navbar.Collapse>
           <div className="d-flex">
-            <Nav.Link disabled>
-              <NavLink
-                activeClassName={styles.formTitleLink_active}
-                className={styles.formTitleLink}
-                to="/main/mybids"
-              >
-                {this.state.auth?.currentUser?.displayName}
-              </NavLink>
+            <Nav.Link
+              disabled
+              as={NavLink}
+              activeClassName={styles.formTitleLink_active}
+              className={styles.formTitleLink}
+              to="/main/mybids"
+            >
+              {this.state.auth?.currentUser?.displayName}
             </Nav.Link>
-            <Button variant="outline-success" onClick={this.logout.bind(this)}>
+            <Button variant="outline-danger" onClick={this.logout.bind(this)}>
               Log out
             </Button>
           </div>

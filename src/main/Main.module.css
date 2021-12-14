@@ -5,7 +5,9 @@ body{
     background-color: #12130f;
 }
 
-
+.dark{
+  background-color: #12130f;
+}
 
   .formTitleLink {
     color: #707c8b;
