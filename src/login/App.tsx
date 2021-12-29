@@ -6,9 +6,10 @@ import * as THREE from "three";
 import { Tos } from "../tos/tos";
 import styles from './App.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getAuth, getRedirectResult, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getRedirectResult, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { auth } from "../firebase/init";
 
 library.add(faGoogle);
 interface IAppProps {
@@ -157,7 +158,6 @@ class App extends React.Component<IAppProps, IAppState> {
   }
 
   signInWithGoogle() {
-    const auth = getAuth();
 
     if (this.state.isMobile) {
       getRedirectResult(auth)

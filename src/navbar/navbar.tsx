@@ -7,8 +7,10 @@ import { NavLink, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { canCreateAuction } from "../api/api";
 
 import styles from "../main/Main.module.css";
+import { auth } from "../firebase/init";
 
 library.add(faSearch);
 
@@ -20,6 +22,7 @@ interface IMyNavbarProps {
 
 interface IMyNavbarState {
   auth: Auth;
+  canCreateAuctions: boolean;
 }
 
 class MyNavbar extends React.Component<IMyNavbarProps, IMyNavbarState> {
@@ -28,6 +31,7 @@ class MyNavbar extends React.Component<IMyNavbarProps, IMyNavbarState> {
     let auth = getAuth();
     this.state = {
       auth: auth,
+      canCreateAuctions: false,
     };
   }
 
@@ -40,6 +44,32 @@ class MyNavbar extends React.Component<IMyNavbarProps, IMyNavbarState> {
   gotoLogin() {
     this.props.history.push("/login");
     window.location.reload();
+  }
+
+  async getCanCreateAuctions() {
+    let response = await canCreateAuction(
+      this.state.auth.currentUser ? this.state.auth.currentUser.uid : ""
+    );
+
+    if (response !== this.state.canCreateAuctions) {
+      this.setState({ canCreateAuctions: response });
+    }
+  }
+
+  showCreateAuctions() {
+    this.getCanCreateAuctions();
+    if (this.state.canCreateAuctions) {
+      return (
+        <Nav.Link
+          as={NavLink}
+          activeClassName={styles.formTitleLink_active}
+          className={styles.formTitleLink}
+          to="/main/myauctions"
+        >
+          My auctions
+        </Nav.Link>
+      );
+    }
   }
 
   render() {
@@ -62,15 +92,7 @@ class MyNavbar extends React.Component<IMyNavbarProps, IMyNavbarState> {
               >
                 Auctions
               </Nav.Link>
-              <Nav.Link
-                as={NavLink}
-                activeClassName={styles.formTitleLink_active}
-                className={styles.formTitleLink}
-                to="/main/myauctions"
-              >
-                My auctions
-              </Nav.Link>
-
+              {this.showCreateAuctions()}
               <Nav.Link
                 as={NavLink}
                 activeClassName={styles.formTitleLink_active}

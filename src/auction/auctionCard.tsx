@@ -43,21 +43,23 @@ export class AuctionCard extends React.Component<
         <ListGroup className={"list-group-flush " + styles.darkContent}>
           <ListGroupItem className={styles.darkContent}>
             {this.state.auction.endTime ? (
-              <Moment
-                filter={this.removeNegativeSign}
-                date={this.state.auction.endTime}
-                format="hh:mm:ss"
-                durationFromNow
-                trim
-                interval={1000}
-              />
+              <div>
+                {"Time left: "}
+                <Moment
+                  filter={this.removeNegativeSign}
+                  date={this.state.auction.endTime}
+                  format="hh:mm:ss"
+                  durationFromNow
+                  trim
+                  interval={1000}
+                />
+              </div>
             ) : (
               "No time limit"
             )}
 
-            <br />
             {this.state.auction.currentBid
-              ? `Current bid: ${this.state.auction.currentBid}`
+              ? `Current bid: $${this.state.auction.currentBid}`
               : `No bid`}
             <br />
           </ListGroupItem>
@@ -88,6 +90,9 @@ export class AuctionCard extends React.Component<
       this.state.auction.id,
       this.auctionCardChanged.bind(this)
     );
+
+    
+
   }
 
   componentWillUnmount() {}

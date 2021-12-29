@@ -1,5 +1,13 @@
 import { DocumentData, QueryDocumentSnapshot } from "@firebase/firestore";
 
+export interface IBid{
+  id: string,
+  time?: number,
+  bid?: number,
+  userId?: string
+  username?: string
+}
+
 export interface IAuction {
   id: string;
   name?: string;
@@ -16,6 +24,18 @@ export interface IAuction {
   bidPercent?: number;
   photos?: any;
   thumbnail?: any; // 100x180
+  bidsId?: string
+}
+
+
+export function docToIBidArray(doc: QueryDocumentSnapshot<DocumentData>) : IBid
+{
+
+  return {
+    id: doc.id,
+    ...doc.data()
+  }
+
 }
 
 
