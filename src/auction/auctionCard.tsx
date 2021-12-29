@@ -32,6 +32,28 @@ export class AuctionCard extends React.Component<
     }
   }
 
+  showBuyOut() {
+    let shouldBeDisabled = true;
+
+    if (
+      this.state.auction.currentBid !== undefined &&
+      this.state.auction.buyoutCutoff !== undefined &&
+      this.state.auction.buyoutPrice !== undefined
+    )
+      shouldBeDisabled =
+        this.state.auction.currentBid * this.state.auction.buyoutCutoff >
+        this.state.auction.buyoutPrice;
+    return (
+      <Button
+        className={styles.endlast}
+        disabled={shouldBeDisabled}
+        variant={shouldBeDisabled ? "outline-danger" : "outline-success"}
+      >
+        Buyout
+      </Button>
+    );
+  }
+
   render() {
     return (
       <Card className={styles.card}>
@@ -68,9 +90,7 @@ export class AuctionCard extends React.Component<
           <Button variant="outline-success" onClick={this.openModal.bind(this)}>
             Bid
           </Button>
-          <Button className={styles.endlast} variant="outline-success">
-            Buyout
-          </Button>
+          {this.showBuyOut()}
         </Card.Body>
       </Card>
     );
@@ -90,9 +110,6 @@ export class AuctionCard extends React.Component<
       this.state.auction.id,
       this.auctionCardChanged.bind(this)
     );
-
-    
-
   }
 
   componentWillUnmount() {}

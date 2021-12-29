@@ -184,7 +184,7 @@ export default class MyModal extends React.Component<{}, IModalState> {
     }
 
     this.nextBid =
-      parseInt(lastItem.bid as unknown as string) +
+      parseFloat(lastItem.bid as unknown as string) +
       lastItem.bid * (this.state.auction?.bidPercent || 0.1);
 
     let tax = this.nextBid * 0.01; // because we live in a capitalsit world :D
@@ -212,7 +212,7 @@ export default class MyModal extends React.Component<{}, IModalState> {
     this.setState({loading: true})
 
 
-    let response = await bid(auth.currentUser?.uid, this.nextBid, this.state.auction?.id)
+    let response = await bid(auth.currentUser?.uid, this.nextBid.toString(), this.state.auction?.id)
 
     if(response.error){
       // should show the error
@@ -222,6 +222,10 @@ export default class MyModal extends React.Component<{}, IModalState> {
     if(response.success){
       this.setState({loading: false})
       console.log(response.success)
+
+      if(this.data.length === 0){
+        window.location.reload();
+      }
     }
 
   }
@@ -235,6 +239,9 @@ export default class MyModal extends React.Component<{}, IModalState> {
       open: false,
       auction: undefined,
     });
+
+    this.data = [];
+    this.nextBid = 0;
   }
 
   render() {
@@ -246,7 +253,7 @@ export default class MyModal extends React.Component<{}, IModalState> {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={this.style}>
+          <Box sx={this.style} component="div">
             <Typography
               sx={{ color: "background.paper" }}
               id="modal-modal-title"
@@ -256,7 +263,7 @@ export default class MyModal extends React.Component<{}, IModalState> {
               {this.state.auction?.name}
             </Typography>
 
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }} component="div">
               <Grid container spacing={2}>
                 <Grid item xs={8}>
                   <Grid container spacing={2}>

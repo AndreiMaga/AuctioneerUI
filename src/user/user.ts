@@ -2,7 +2,9 @@
 
 export interface User{
     uid?: string,
-    availableFunds?: number
+    availableFunds?: number,
+    token?: string,
+    apikey?: string
 }
 
 let currentUser :User = {}

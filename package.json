@@ -1,6 +1,6 @@
 {
   "name": "auctioneer",
-  "proxy": "http://localhost:9898",
+  "proxy": "http://localhost:9897",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

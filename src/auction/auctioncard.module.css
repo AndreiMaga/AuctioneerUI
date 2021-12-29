@@ -14,3 +14,8 @@
 .endlast{
     float: right;
 }
+
+
+.disabled{
+    color: white;
+}

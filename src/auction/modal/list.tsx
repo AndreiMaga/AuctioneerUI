@@ -21,7 +21,14 @@ export default class MyList extends Component<{}, IMyListState> {
 
   pruneEmail(str: string | undefined) {
     if (str === undefined) return str;
+    if (!str.includes("@")) return str;
     return str.substring(0, str.lastIndexOf("@"));
+  }
+
+  showBid(bid:number | undefined){
+    if(bid === undefined)
+      bid = 0
+    return "$" + parseFloat(bid.toString()).toFixed(2)
   }
 
   render() {
@@ -30,11 +37,13 @@ export default class MyList extends Component<{}, IMyListState> {
         <List
           sx={{
             width: "100%",
-            maxWidth: 500,
+            maxWidth: 700,
             bgcolor: "#454545",
             height: 300,
+            maxHeight: 300,
+            overflow:"auto"
           }}
-          component="nav"
+          component="div"
           aria-labelledby="nested-list-subheader"
           subheader={
             <ListSubheader
@@ -58,7 +67,7 @@ export default class MyList extends Component<{}, IMyListState> {
                   disableRipple
                   edge="end"
                 >
-                  ${m.bid}
+                  {this.showBid(m.bid)}
                 </IconButton>
               }
             >
